@@ -14,60 +14,40 @@
 @end
 
 @implementation ZHXIndexView
-
+#pragma mark - LifeCycle Method
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-                self.viewWidth = 25;
-
+        self.contentHeight = CGRectGetHeight(self.frame);
+        self.titleColor = [UIColor blackColor];
+        self.titleSize = 13.0;
     }
     return self;
 }
-//- (instancetype)init {
-//    if (self = [super init]) {
-//        self.viewWidth = 25;
-//    }
-//
-//    return self;
-//}
-
-//- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic {
-//    [AZConvert convertForModel:self data:dic root:nil];
-//    return YES;
-//}
 
 - (void)layoutSubviews {
-//    WEAK_SELF;
-    self.buttonHeight = (self.bounds.size.height - self.topOffset - self.bottomOffset)/self.indexButtons.count;
-    for (NSInteger i = 0; i < self.indexButtons.count; i++) {
-        UIButton *btn = self.indexButtons[i];
-        if (i == 0) {
-            /*
-            [btn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(weakSelf).offset(weakSelf.topOffset);
-                make.centerX.equalTo(weakSelf);
-                make.width.equalTo(weakSelf);
-                make.height.mas_equalTo(weakSelf.buttonHeight);
-            }];
-             */
-            btn.frame = CGRectMake(0, 30, 24, 20);
-        } else {
-            /*
-            [btn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(weakSelf.indexButtons[i - 1].mas_bottom);
-                make.centerX.equalTo(weakSelf);
-                make.width.equalTo(weakSelf);
-                make.height.mas_equalTo(weakSelf.buttonHeight);
-            }];
-             */
-            UIButton *lastBtn = self.indexButtons[i - 1];
-            btn.frame = CGRectMake(0, CGRectGetMaxY(lastBtn.frame), 24, 20);
-
-        }
-    }
+    self.buttonHeight = self.contentHeight/self.indexButtons.count;
+       for (NSInteger i = 0; i < self.indexButtons.count; i++) {
+           UIButton *btn = self.indexButtons[i];
+           if (i == 0) {
+               btn.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), self.buttonHeight);
+           } else {
+               UIButton *lastBtn = self.indexButtons[i - 1];
+               btn.frame = CGRectMake(0, CGRectGetMaxY(lastBtn.frame), CGRectGetWidth(self.frame), self.buttonHeight);
+           }
+       }
 }
+#pragma mark - Setter Method
+- (void)setIndexTitles:(NSArray<NSString *> *)indexTitles{
+    _indexTitles = indexTitles;
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    self.indexButtons = [self creatAllButtons];
 
+}
+- (void)setContentHeight:(float)contentHeight{
+    _contentHeight = contentHeight;
+}
 - (void)setTitleColor:(UIColor *)titleColor {
     _titleColor = titleColor;
     for (UIButton *btn in self.indexButtons) {
@@ -81,16 +61,14 @@
         btn.titleLabel.font = [UIFont systemFontOfSize: _titleSize];
     }
 }
-
-- (void)setIndexTitles:(NSArray *)indexTitles {
-    _indexTitles = indexTitles;
-    
-    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-    self.indexButtons = [self newIndexButtons];
+- (void)setContentBackgroundColor:(UIColor *)contentBackgroundColor {
+    _contentBackgroundColor = contentBackgroundColor;
+    self.backgroundColor = contentBackgroundColor;
 }
 
-- (NSMutableArray<UIButton *> *)newIndexButtons {
+
+#pragma mark - Private Method
+- (NSMutableArray<UIButton *> *)creatAllButtons {
     for (UIButton *old in self.indexButtons) {
         [old removeFromSuperview];
     }
@@ -116,27 +94,20 @@
     
     return buttons;
 }
-
+#pragma mark - Event Method
 - (void)touchInsideAction:(NSSet<UITouch *> *)touches {
     NSArray *touchArray = touches.allObjects;
     UITouch *touch = touchArray.firstObject;
     CGPoint touchPoint = [touch locationInView:self];
-    
-    if (touchPoint.y <= self.topOffset || touchPoint.y >= self.bounds.size.height - self.bottomOffset) {
-        return;
+    NSInteger buttonTag = touchPoint.y  / self.buttonHeight;
+    if ([self.delegate respondsToSelector:@selector(indexViewDidSelectIndex:)]) {
+            [self.delegate indexViewDidSelectIndex:buttonTag];
     }
-    
-    NSInteger buttonTag = (touchPoint.y - self.topOffset) / self.buttonHeight;
-    
-    [self.delegate touchInside:buttonTag];
 }
 
-- (void)setViewBackgroundColor:(UIColor *)viewBackgroundColor {
-    _viewBackgroundColor = viewBackgroundColor;
-    self.backgroundColor = _viewBackgroundColor;
-}
 
-// touch事件
+
+#pragma mark - System Touch Method
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self touchInsideAction:touches];
 }

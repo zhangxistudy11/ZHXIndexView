@@ -11,25 +11,45 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol ZHXIndexViewDelegate <NSObject>
+@required
 
-- (void)touchInside:(NSInteger)index;
+- (void)indexViewDidSelectIndex:(NSInteger)index;
 
 @end
 
 
 @interface ZHXIndexView : UIView
-@property(nonatomic, strong) NSArray *indexTitles;
 
-@property(nonatomic, strong) UIColor *titleColor;
-@property(nonatomic, assign) CGFloat titleSize;
-@property(nonatomic, assign) CGFloat viewWidth;
-@property(nonatomic, strong) UIColor *viewBackgroundColor;
-
-// topOffset和bottomOffset这两个属性只有在build版本号>7610时才可以使用，之前的版本oc有bug，会导致崩溃
-@property(nonatomic, assign) CGFloat topOffset; // 侧边目录首个item距view的上间距
-@property(nonatomic, assign) CGFloat bottomOffset;// 侧边目录末个item距view的下间距
-
+/**
+* The delegate of indexView.
+*/
 @property(nonatomic, weak) id<ZHXIndexViewDelegate> delegate;
+
+/**
+* The data source of indexView.
+*/
+@property(nonatomic, strong) NSArray <NSString *>*indexTitles;
+
+/**
+* The height of View . Size.hieght  is default value.
+*/
+@property(nonatomic,assign) float contentHeight;
+
+/**
+* The title tintColor of item. Default is black.
+*/
+@property(nonatomic, strong) UIColor *titleColor;
+/**
+* The title size of item. Default is 13.0.
+*/
+@property(nonatomic, assign) CGFloat titleSize;
+/**
+* The view backgroundcolor. Default is clear.
+*/
+@property(nonatomic, strong) UIColor *contentBackgroundColor;
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

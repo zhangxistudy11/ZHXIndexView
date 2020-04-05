@@ -24,6 +24,8 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
 @interface ViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,ZHXIndexViewDelegate>
 @property(nonatomic,strong) UILabel *titleLB;
 @property(nonatomic,strong) UICollectionView *collectionView;
+@property(nonatomic,assign) float sectionHeaderHeight;
+@property(nonatomic,assign) float cellTopMargin;
 @property(nonatomic,strong) NSArray *cityList;
 @property(nonatomic,strong) NSArray *indexData;
 @property(nonatomic,strong) ZHXIndexView *indexView;
@@ -36,7 +38,9 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
     
     self.title = @"ZHXIndexView";
     self.view.backgroundColor = [UIColor colorWithString:@"#f5f5f5"];
-
+    self.sectionHeaderHeight = 30;
+    self.cellTopMargin = 10;
+    
     [self setUpView];
     [self laodCityData];
     [self addIndexView];
@@ -55,11 +59,11 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
     for (NSString *letter in self.indexData) {
         NSInteger count = (arc4random() % 13) + 7;
         NSMutableArray *cityData = [[NSMutableArray alloc]init];
-          for (int i=0; i<count; i++) {
-              NSInteger suppositionalIndex = (arc4random() % 6) + 0;
-              NSString *suppositionalCity = [NSString stringWithFormat:@"%@%@",letter,[suppositionalGroup objectAtIndex:suppositionalIndex]];
-              [cityData addObject:suppositionalCity];
-          }
+        for (int i=0; i<count; i++) {
+            NSInteger suppositionalIndex = (arc4random() % 6) + 0;
+            NSString *suppositionalCity = [NSString stringWithFormat:@"%@%@",letter,[suppositionalGroup objectAtIndex:suppositionalIndex]];
+            [cityData addObject:suppositionalCity];
+        }
         NSDictionary *cityDataGroup = @{letter:cityData};
         [cityMulList addObject:cityDataGroup];
     }
@@ -67,74 +71,28 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
     [self.collectionView reloadData];
 }
 - (void)addIndexView {
-    self.indexView = [[ZHXIndexView alloc]initWithFrame:CGRectMake(ScreenWidth-24, 100, 24, 250)];
+    self.indexView = [[ZHXIndexView alloc]initWithFrame:CGRectMake(ScreenWidth-24, 180, 24, 500)];
     [self.view addSubview:self.indexView];
-    self.indexView.indexTitles = self.indexData;
     self.indexView.delegate = self;
-    [self.collectionView reloadData];
+    
+    self.indexView.indexTitles = self.indexData;
+    self.indexView.titleColor = [UIColor colorWithString:@"#999999"];
 }
 #pragma mark - ZHXIndexViewDelegate
-- (void)touchInside:(NSInteger)index {
+- (void)indexViewDidSelectIndex:(NSInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
     CGFloat offsetY = [self.collectionView layoutAttributesForItemAtIndexPath:indexPath].frame.origin.y;
-    
-//    NSString *title = self.viewModel.cityList[index][@"title"];
-//    if ([title isEqualToString:ZTFlightChooseCitySectionTitle_Location] || [title isEqualToString:ZTFlightChooseCitySectionTitle_History]){
-//        offsetY = offsetY - 37;
-//    }else if( [title isEqualToString:ZTFlightChooseCitySectionTitle_HotCity]) {
-//        offsetY = offsetY - 34 - 3;
-//    }else {
-//        offsetY = offsetY - 25 - 10;
-//    }
-    [self.collectionView setContentOffset:CGPointMake(0, offsetY) animated:NO];
-}
-#pragma mark - UICollectionViewDelegate & UICollectionViewDataSource
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return self.cityList.count;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSDictionary *cityDict = [self.cityList objectAtIndex:section];
-    NSArray *cityGroup = [cityDict valueForKey:[self.indexData objectAtIndex:section]];
-    return cityGroup.count;
-}
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-return UIEdgeInsetsMake(10, 15, 12, 24);
-}
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 8;
-}
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 8;
-}
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    float itemCellWidth = (ScreenWidth-15-24-3*8)/4;
-    return CGSizeMake(itemCellWidth, 34);
-    
-}
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ZHXCityItemCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCollectionCellIdentifier forIndexPath:indexPath];
-    NSDictionary *cityDict = [self.cityList objectAtIndex:indexPath.section];
-    NSArray *cityGroup = [cityDict valueForKey:[self.indexData objectAtIndex:indexPath.section]];
-    [cell updateCityName:[cityGroup objectAtIndex:indexPath.row]];
-    return cell;
-}
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(ScreenWidth, 30);
-}
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        ZHXCityCollectionHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kCollectionHeaderIdentifier forIndexPath:indexPath];
-        NSString *title = self.indexData[indexPath.section];
-        [header updateCityIndex:title];
-        return header;
+    /**
+     If you set section header , collectionView edgeInsets .
+     Please exclude it .
+     */
+    if (self.sectionHeaderHeight>0) {
+        offsetY = offsetY - self.sectionHeaderHeight;
     }
-    return nil;
+    if (self.cellTopMargin>0) {
+        offsetY = offsetY - self.cellTopMargin;
+    }
+    [self.collectionView setContentOffset:CGPointMake(0, offsetY) animated:NO];
 }
 #pragma mark - Getter Method
 - (UILabel *)titleLB {
@@ -158,11 +116,60 @@ return UIEdgeInsetsMake(10, 15, 12, 24);
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerClass:[ZHXCityCollectionHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kCollectionHeaderIdentifier];
-
+        
         [_collectionView registerClass:[ZHXCityItemCollectionCell class] forCellWithReuseIdentifier:kCollectionCellIdentifier];
         _collectionView.backgroundColor = [UIColor clearColor];
     }
     return _collectionView;
+}
+
+#pragma mark - UICollectionViewDelegate & UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return self.cityList.count;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSDictionary *cityDict = [self.cityList objectAtIndex:section];
+    NSArray *cityGroup = [cityDict valueForKey:[self.indexData objectAtIndex:section]];
+    return cityGroup.count;
+}
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(self.cellTopMargin, 15, 12, 24);
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 8;
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 8;
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    float itemCellWidth = (ScreenWidth-15-24-3*8)/4;
+    return CGSizeMake(itemCellWidth, 34);
+    
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ZHXCityItemCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCollectionCellIdentifier forIndexPath:indexPath];
+    NSDictionary *cityDict = [self.cityList objectAtIndex:indexPath.section];
+    NSArray *cityGroup = [cityDict valueForKey:[self.indexData objectAtIndex:indexPath.section]];
+    [cell updateCityName:[cityGroup objectAtIndex:indexPath.row]];
+    return cell;
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    return CGSizeMake(ScreenWidth, self.sectionHeaderHeight);
+}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        ZHXCityCollectionHeader *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kCollectionHeaderIdentifier forIndexPath:indexPath];
+        NSString *title = self.indexData[indexPath.section];
+        [header updateCityIndex:title];
+        return header;
+    }
+    return nil;
 }
 
 
