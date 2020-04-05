@@ -173,35 +173,24 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
     return nil;
 }
 #pragma mark - UIScrollView Delegate
-//手指停止拖拽的时候开始执行
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    NSLog(@"1111");
-    if (!decelerate)
-    {
-        NSLog(@"2222");
 
-        //这里写上停止时要执行的代码
-    }
-}
-//手指离开屏幕后ScrollView还会继续滚动一段时间直到停止后才会执行
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)ascrollView{
-    NSLog(@"3333");
- NSArray *indexPathsForVisibleRows= self.collectionView.indexPathsForVisibleItems;
-     NSIndexPath *minIndexPath = [NSIndexPath indexPathForRow:0 inSection:9999];
+    
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSArray *indexPathsForVisibleRows= self.collectionView.indexPathsForVisibleItems;
+        NSIndexPath *minIndexPath = [NSIndexPath indexPathForRow:0 inSection:9999];
         NSIndexPath *maxIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-
+        
         for (int i=0; i<indexPathsForVisibleRows.count; i++) {
             NSIndexPath *itemIndex = [indexPathsForVisibleRows objectAtIndex:i];
             minIndexPath = [itemIndex compare:minIndexPath]==NSOrderedDescending?minIndexPath:itemIndex;
             maxIndexPath = [itemIndex compare:maxIndexPath]==NSOrderedDescending?itemIndex:maxIndexPath;
         }
-    [self.indexView changeSelectIndexWhenScrollStop:minIndexPath.section];
-        NSLog(@"Minsection--%ld--row--%ld",minIndexPath.section,minIndexPath.row);
-        NSLog(@"maxsection--%ld--row--%ld",maxIndexPath.section,maxIndexPath.row);
-
-//        NSDictionary *maxItem = @{@"section":@(maxIndexPath.section),@"row":@(maxIndexPath.row)};
-//        NSDictionary *minItem = @{@"section":@(minIndexPath.section),@"row":@(minIndexPath.row)};
-//        NSDictionary *result =@{@"maxItem":maxItem,@"minItem":minItem};
+        [self.indexView changeSelectIndexWhenScrollStop:minIndexPath.section];
+//        NSLog(@"Minsection--%ld--row--%ld",minIndexPath.section,minIndexPath.row);
+//        NSLog(@"maxsection--%ld--row--%ld",maxIndexPath.section,maxIndexPath.row);
+    });
 }
 @end
