@@ -76,7 +76,8 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
     self.indexView.delegate = self;
     
     self.indexView.indexTitles = self.indexData;
-    self.indexView.titleColor = [UIColor colorWithString:@"#999999"];
+    self.indexView.itemTitleColor = [UIColor colorWithString:@"#999999"];
+    self.indexView.itemSelectedBackgroundColor = [UIColor colorWithString:@"#198CFF"];
 }
 #pragma mark - ZHXIndexViewDelegate
 - (void)indexViewDidSelectIndex:(NSInteger)index {

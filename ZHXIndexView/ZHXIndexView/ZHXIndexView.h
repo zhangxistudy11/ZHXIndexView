@@ -36,19 +36,26 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign) float contentHeight;
 
 /**
-* The title tintColor of item. Default is black.
-*/
-@property(nonatomic, strong) UIColor *titleColor;
-/**
-* The title size of item. Default is 13.0.
-*/
-@property(nonatomic, assign) CGFloat titleSize;
-/**
 * The view backgroundcolor. Default is clear.
 */
 @property(nonatomic, strong) UIColor *contentBackgroundColor;
 
+/**
+* The title tintColor of item. Default is black.
+*/
+@property(nonatomic, strong) UIColor *itemTitleColor;
+/**
+* The title size of item. Default is 13.0.
+*/
+@property(nonatomic, assign) CGFloat itemTitleSize;
 
+/*If you need item backgroundColor ,Please implement follow property、method*/
+
+/**
+* The item backgroundcolor when selected. Default is nil.
+*
+*/
+@property(nonatomic, strong) UIColor *itemSelectedBackgroundColor;
 
 @end
 
