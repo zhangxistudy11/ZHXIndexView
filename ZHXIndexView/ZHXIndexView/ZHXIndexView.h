@@ -49,13 +49,17 @@ NS_ASSUME_NONNULL_BEGIN
 */
 @property(nonatomic, assign) CGFloat itemTitleSize;
 
-/*If you need item backgroundColor ,Please implement follow property、method*/
+/*If you need selected item backgroundColor ,Please implement follow property、method*/
 
 /**
 * The item backgroundcolor when selected. Default is nil.
 *
 */
 @property(nonatomic, strong) UIColor *itemSelectedBackgroundColor;
+
+/// change select item backgroundcolor when scroll stop
+/// @param index selectIndex
+- (void)changeSelectIndexWhenScrollStop:(NSInteger)index;
 
 @end
 

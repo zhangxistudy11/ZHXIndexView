@@ -11,6 +11,8 @@
 @interface ZHXIndexView ()
 @property(nonatomic, strong) NSMutableArray<UIButton *> *indexButtons;
 @property(nonatomic, assign) CGFloat buttonHeight;
+@property(nonatomic,assign) NSInteger selectedIndex;
+
 @end
 
 @implementation ZHXIndexView
@@ -22,6 +24,7 @@
         self.contentHeight = CGRectGetHeight(self.frame);
         self.itemTitleColor = [UIColor blackColor];
         self.itemTitleSize = 13.0;
+        self.selectedIndex = 0;
     }
     return self;
 }
@@ -72,13 +75,16 @@
         float cornerRadius = MIN(CGRectGetWidth(self.frame), (CGRectGetHeight(self.frame)/self.indexTitles.count)) /2.0;
         UIButton *btn = [self.indexButtons objectAtIndex:i];
         btn.layer.cornerRadius = cornerRadius;
-        if (i==0) {
+        if (i==self.selectedIndex) {
             btn.backgroundColor = self.itemSelectedBackgroundColor;
         }
     }
   
 }
-
+#pragma mark - Public Method
+- (void)changeSelectIndexWhenScrollStop:(NSInteger)index {
+    [self changeSelectItemColorWihtIndex:index];
+}
 
 #pragma mark - Private Method
 - (NSMutableArray<UIButton *> *)creatAllButtons {
@@ -108,12 +114,25 @@
     
     return buttons;
 }
+- (void)changeSelectItemColorWihtIndex:(NSInteger)index{
+    self.selectedIndex = index;
+       for (int i=0; i<self.indexButtons.count; i++) {
+         UIButton *btn = [self.indexButtons objectAtIndex:i];
+             if (i==self.selectedIndex) {
+                 btn.backgroundColor = self.itemSelectedBackgroundColor;
+             }else{
+                 btn.backgroundColor = [UIColor clearColor];
+             }
+         }
+}
 #pragma mark - Event Method
 - (void)touchInsideAction:(NSSet<UITouch *> *)touches {
     NSArray *touchArray = touches.allObjects;
     UITouch *touch = touchArray.firstObject;
     CGPoint touchPoint = [touch locationInView:self];
     NSInteger buttonTag = touchPoint.y  / self.buttonHeight;
+    [self changeSelectItemColorWihtIndex:buttonTag];
+
     if ([self.delegate respondsToSelector:@selector(indexViewDidSelectIndex:)]) {
         [self.delegate indexViewDidSelectIndex:buttonTag];
     }
