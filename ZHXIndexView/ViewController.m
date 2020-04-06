@@ -174,9 +174,6 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
 }
 #pragma mark - UIScrollView Delegate
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)ascrollView{
-    
-}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSArray *indexPathsForVisibleRows= self.collectionView.indexPathsForVisibleItems;
@@ -189,8 +186,6 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
             maxIndexPath = [itemIndex compare:maxIndexPath]==NSOrderedDescending?itemIndex:maxIndexPath;
         }
         [self.indexView changeSelectIndexWhenScrollStop:minIndexPath.section];
-//        NSLog(@"Minsection--%ld--row--%ld",minIndexPath.section,minIndexPath.row);
-//        NSLog(@"maxsection--%ld--row--%ld",maxIndexPath.section,maxIndexPath.row);
     });
 }
 @end
