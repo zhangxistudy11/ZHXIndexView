@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  CollectionViewController.h
 //  ZHXIndexView
 //
 //  Created by 张玺 on 2020/4/4.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface CollectionViewController : UIViewController
 
 
 @end

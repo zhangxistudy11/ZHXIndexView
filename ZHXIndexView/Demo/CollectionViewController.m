@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  CollectionViewController.m
 //  ZHXIndexView
 //
 //  Created by 张玺 on 2020/4/4.
@@ -10,7 +10,7 @@
 #define ScreenHeight     [UIScreen mainScreen].bounds.size.height
 
 
-#import "ViewController.h"
+#import "CollectionViewController.h"
 #import "UIColor+Extension.h"
 #import "ZHXCityItemCollectionCell.h"
 #import "ZHXCityCollectionHeader.h"
@@ -21,8 +21,7 @@ static  NSString *const kCollectionCellIdentifier = @"ZHXIndexViewCellIdentifier
 static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdentifier";
 
 
-@interface ViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,ZHXIndexViewDelegate,UIScrollViewDelegate>
-@property(nonatomic,strong) UILabel *titleLB;
+@interface CollectionViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,ZHXIndexViewDelegate,UIScrollViewDelegate>
 @property(nonatomic,strong) UICollectionView *collectionView;
 @property(nonatomic,assign) float sectionHeaderHeight;
 @property(nonatomic,assign) float cellTopMargin;
@@ -31,12 +30,12 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
 @property(nonatomic,strong) ZHXIndexView *indexView;
 @end
 
-@implementation ViewController
+@implementation CollectionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"ZHXIndexView";
+    self.navigationItem.title = @"CityList";
     self.view.backgroundColor = [UIColor colorWithString:@"#f5f5f5"];
     self.sectionHeaderHeight = 30;
     self.cellTopMargin = 10;
@@ -47,7 +46,6 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
 }
 
 - (void)setUpView {
-    [self.view addSubview:self.titleLB];
     [self.view addSubview:self.collectionView];
     
     
@@ -95,17 +93,24 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
     }
     [self.collectionView setContentOffset:CGPointMake(0, offsetY) animated:NO];
 }
-#pragma mark - Getter Method
-- (UILabel *)titleLB {
-    if (!_titleLB) {
-        _titleLB = [[UILabel alloc]initWithFrame:CGRectMake(0, 30, ScreenWidth, 50)];
-        _titleLB.textColor = [UIColor blackColor];
-        _titleLB.font = [UIFont boldSystemFontOfSize:20];
-        _titleLB.textAlignment = NSTextAlignmentCenter;
-        _titleLB.text = @"ZHXIndexView";
-    }
-    return _titleLB;
+#pragma mark - UIScrollView Delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSArray *indexPathsForVisibleRows= self.collectionView.indexPathsForVisibleItems;
+        NSIndexPath *minIndexPath = [NSIndexPath indexPathForRow:0 inSection:9999];
+        NSIndexPath *maxIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        
+        for (int i=0; i<indexPathsForVisibleRows.count; i++) {
+            NSIndexPath *itemIndex = [indexPathsForVisibleRows objectAtIndex:i];
+            minIndexPath = [itemIndex compare:minIndexPath]==NSOrderedDescending?minIndexPath:itemIndex;
+            maxIndexPath = [itemIndex compare:maxIndexPath]==NSOrderedDescending?itemIndex:maxIndexPath;
+        }
+        [self.indexView changeSelectIndexWhenScrollStop:minIndexPath.section];
+    });
 }
+#pragma mark - Getter Method
+
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
@@ -172,20 +177,5 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
     }
     return nil;
 }
-#pragma mark - UIScrollView Delegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSArray *indexPathsForVisibleRows= self.collectionView.indexPathsForVisibleItems;
-        NSIndexPath *minIndexPath = [NSIndexPath indexPathForRow:0 inSection:9999];
-        NSIndexPath *maxIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        
-        for (int i=0; i<indexPathsForVisibleRows.count; i++) {
-            NSIndexPath *itemIndex = [indexPathsForVisibleRows objectAtIndex:i];
-            minIndexPath = [itemIndex compare:minIndexPath]==NSOrderedDescending?minIndexPath:itemIndex;
-            maxIndexPath = [itemIndex compare:maxIndexPath]==NSOrderedDescending?itemIndex:maxIndexPath;
-        }
-        [self.indexView changeSelectIndexWhenScrollStop:minIndexPath.section];
-    });
-}
 @end

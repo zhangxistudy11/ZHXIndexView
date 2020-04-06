@@ -14,10 +14,11 @@
 		330F516C2438B81C00E9C7A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F516B2438B81C00E9C7A9 /* main.m */; };
 		33213A6D2439C7ED00E6BE54 /* ZHXIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33213A6C2439C7ED00E6BE54 /* ZHXIndexView.m */; };
 		335D8415243B115500F7C792 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D840E243B115500F7C792 /* RootViewController.m */; };
-		335D8416243B115500F7C792 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D840F243B115500F7C792 /* ViewController.m */; };
+		335D8416243B115500F7C792 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D840F243B115500F7C792 /* CollectionViewController.m */; };
 		335D8417243B115500F7C792 /* ZHXCityCollectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D8413243B115500F7C792 /* ZHXCityCollectionHeader.m */; };
 		335D8418243B115500F7C792 /* ZHXCityItemCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D8414243B115500F7C792 /* ZHXCityItemCollectionCell.m */; };
 		335D841B243B118D00F7C792 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D841A243B118D00F7C792 /* UIColor+Extension.m */; };
+		335D841E243B15DA00F7C792 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D841D243B15DA00F7C792 /* TableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,14 +35,16 @@
 		33213A6C2439C7ED00E6BE54 /* ZHXIndexView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHXIndexView.m; sourceTree = "<group>"; };
 		335D840D243B115500F7C792 /* ZHXCityItemCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHXCityItemCollectionCell.h; sourceTree = "<group>"; };
 		335D840E243B115500F7C792 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		335D840F243B115500F7C792 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		335D840F243B115500F7C792 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		335D8410243B115500F7C792 /* ZHXCityCollectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHXCityCollectionHeader.h; sourceTree = "<group>"; };
-		335D8411243B115500F7C792 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		335D8411243B115500F7C792 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		335D8412243B115500F7C792 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		335D8413243B115500F7C792 /* ZHXCityCollectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHXCityCollectionHeader.m; sourceTree = "<group>"; };
 		335D8414243B115500F7C792 /* ZHXCityItemCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHXCityItemCollectionCell.m; sourceTree = "<group>"; };
 		335D8419243B118D00F7C792 /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
 		335D841A243B118D00F7C792 /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		335D841C243B15DA00F7C792 /* TableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		335D841D243B15DA00F7C792 /* TableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,8 +115,10 @@
 			children = (
 				335D8412243B115500F7C792 /* RootViewController.h */,
 				335D840E243B115500F7C792 /* RootViewController.m */,
-				335D8411243B115500F7C792 /* ViewController.h */,
-				335D840F243B115500F7C792 /* ViewController.m */,
+				335D8411243B115500F7C792 /* CollectionViewController.h */,
+				335D840F243B115500F7C792 /* CollectionViewController.m */,
+				335D841C243B15DA00F7C792 /* TableViewController.h */,
+				335D841D243B15DA00F7C792 /* TableViewController.m */,
 				335D8410243B115500F7C792 /* ZHXCityCollectionHeader.h */,
 				335D8413243B115500F7C792 /* ZHXCityCollectionHeader.m */,
 				335D840D243B115500F7C792 /* ZHXCityItemCollectionCell.h */,
@@ -191,9 +196,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				335D8416243B115500F7C792 /* ViewController.m in Sources */,
+				335D8416243B115500F7C792 /* CollectionViewController.m in Sources */,
 				330F515B2438B81800E9C7A9 /* AppDelegate.m in Sources */,
 				335D8418243B115500F7C792 /* ZHXCityItemCollectionCell.m in Sources */,
+				335D841E243B15DA00F7C792 /* TableViewController.m in Sources */,
 				335D8415243B115500F7C792 /* RootViewController.m in Sources */,
 				335D841B243B118D00F7C792 /* UIColor+Extension.m in Sources */,
 				335D8417243B115500F7C792 /* ZHXCityCollectionHeader.m in Sources */,

@@ -7,8 +7,8 @@
 //
 
 #import "RootViewController.h"
-#import "ViewController.h"
-
+#import "CollectionViewController.h"
+#import "TableViewController.h"
 @interface RootViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView  * _tableView;
@@ -22,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.navigationItem.title = @"ZHXIndexView Demo";
     _tableView = [[UITableView  alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame)
                                                                , CGRectGetHeight(self.view.frame)) style:UITableViewStylePlain];
     _tableView.delegate =self;
@@ -69,14 +69,14 @@
     switch (indexPath.row) {
         case 0:
         {
-            ViewController * vc = [[ViewController  alloc]init];
+            CollectionViewController * vc = [[CollectionViewController  alloc]init];
             [self.navigationController pushViewController:vc animated:YES];
             
         }
             break;
         case 1:
         {
-            ViewController * vc = [[ViewController  alloc]init];
+            TableViewController * vc = [[TableViewController  alloc]init];
             [self.navigationController pushViewController:vc animated:YES];
             
         }
