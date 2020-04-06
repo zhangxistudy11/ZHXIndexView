@@ -7,8 +7,12 @@
 //
 
 #import "RootViewController.h"
+#import "ViewController.h"
 
-@interface RootViewController ()
+@interface RootViewController ()<UITableViewDataSource,UITableViewDelegate>
+{
+    UITableView  * _tableView;
+}
 
 @end
 
@@ -17,17 +21,70 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor cyanColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    _tableView = [[UITableView  alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame)
+                                                               , CGRectGetHeight(self.view.frame)) style:UITableViewStylePlain];
+    _tableView.delegate =self;
+    _tableView.dataSource = self;
+    [self.view  addSubview:_tableView];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+#pragma mark - UITableViewDataSource,UITableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 2;
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static  NSString *  CellIdentifier = @"CellIdentifier";
+    UITableViewCell  * cell = [tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell  alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    }
+    switch (indexPath.row) {
+        case 0:
+            cell.textLabel.text = @"IndexView of UICollectionView";
+            return cell;
+            break;
+        case 1:
+            cell.textLabel.text = @"IndexView of UITableView";
+            return cell;
+            break;
+        default:
+            break;
+    }
+    
+    cell.textLabel.text = @"";
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    switch (indexPath.row) {
+        case 0:
+        {
+            ViewController * vc = [[ViewController  alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+            break;
+        case 1:
+        {
+            ViewController * vc = [[ViewController  alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+            break;
+    
+        default:
+            break;
+    }
+}
 
 @end
