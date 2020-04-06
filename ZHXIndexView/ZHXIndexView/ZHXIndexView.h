@@ -20,6 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZHXIndexView : UIView
 
+/// determine the top section on scrreen when scroll stop .
+/// @param view dispaly view
++ (NSInteger)determineTopSectionLocationWithView:(id)view;
+
 /**
 * The delegate of indexView.
 */
@@ -56,6 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 *
 */
 @property(nonatomic, strong) UIColor *itemSelectedBackgroundColor;
+
 
 /// change select item backgroundcolor when scroll stop
 /// @param index selectIndex

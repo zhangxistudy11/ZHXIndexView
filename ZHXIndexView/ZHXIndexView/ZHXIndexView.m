@@ -17,6 +17,34 @@
 @end
 
 @implementation ZHXIndexView
++ (NSInteger)determineTopSectionLocationWithView:(id)view{
+    if ([view isKindOfClass:[UICollectionView class]]) {
+        UICollectionView *collectionView = view;
+        NSArray *indexPathsForVisibleRows= collectionView.indexPathsForVisibleItems;
+        NSIndexPath *minIndexPath = [NSIndexPath indexPathForRow:0 inSection:9999];
+        for (int i=0; i<indexPathsForVisibleRows.count; i++) {
+            NSIndexPath *itemIndex = [indexPathsForVisibleRows objectAtIndex:i];
+            minIndexPath = [itemIndex compare:minIndexPath]==NSOrderedDescending?minIndexPath:itemIndex;
+            
+        }
+        return minIndexPath.section;
+    }else if ([view isKindOfClass:[UITableView class]]){
+        UITableView *tableView = view;
+        
+        NSArray *indexPathsForVisibleRows= tableView.indexPathsForVisibleRows;
+        NSIndexPath *minIndexPath = [NSIndexPath indexPathForRow:0 inSection:9999];
+        
+        for (int i=0; i<indexPathsForVisibleRows.count; i++) {
+            NSIndexPath *itemIndex = [indexPathsForVisibleRows objectAtIndex:i];
+            minIndexPath = [itemIndex compare:minIndexPath]==NSOrderedDescending?minIndexPath:itemIndex;
+            
+        }
+        return minIndexPath.section;
+    }else{}
+    return 0;
+    
+}
+
 #pragma mark - LifeCycle Method
 - (instancetype)initWithFrame:(CGRect)frame
 {

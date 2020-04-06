@@ -97,16 +97,9 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSArray *indexPathsForVisibleRows= self.collectionView.indexPathsForVisibleItems;
-        NSIndexPath *minIndexPath = [NSIndexPath indexPathForRow:0 inSection:9999];
-        NSIndexPath *maxIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         
-        for (int i=0; i<indexPathsForVisibleRows.count; i++) {
-            NSIndexPath *itemIndex = [indexPathsForVisibleRows objectAtIndex:i];
-            minIndexPath = [itemIndex compare:minIndexPath]==NSOrderedDescending?minIndexPath:itemIndex;
-            maxIndexPath = [itemIndex compare:maxIndexPath]==NSOrderedDescending?itemIndex:maxIndexPath;
-        }
-        [self.indexView changeSelectIndexWhenScrollStop:minIndexPath.section];
+        NSInteger topSection =  [ZHXIndexView determineTopSectionLocationWithView:self.collectionView];
+        [self.indexView changeSelectIndexWhenScrollStop:topSection];
     });
 }
 #pragma mark - Getter Method
