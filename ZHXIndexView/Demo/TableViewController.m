@@ -14,6 +14,9 @@
 
 #import "ZHXIndexView.h"
 
+static  NSString *const kTableCellIdentifier = @"ZHXIndexViewTableCellIdentifier";
+static  NSString *const kTableHeaderIdentifier = @"ZHXIndexViewTableHeaderIdentifier";
+
 @interface TableViewController ()<UITableViewDataSource,UITableViewDelegate,ZHXIndexViewDelegate,UIScrollViewDelegate>
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,assign) float sectionHeaderHeight;
@@ -29,23 +32,29 @@
     [super viewDidLoad];
     
     self.sectionHeaderHeight = 30;
-
+    
     
     self.navigationItem.title = @"Address Book";
     self.view.backgroundColor = [UIColor colorWithString:@"#f5f5f5"];
     [self setUpView];
-    [self laodCityData];
+    [self laodNameData];
     [self addIndexView];
 }
 - (void)setUpView {
-    _tableView = [[UITableView  alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame)
-                                                               , CGRectGetHeight(self.view.frame)) style:UITableViewStylePlain];
+    _tableView = [[UITableView  alloc]initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.frame)
+                                                               , CGRectGetHeight(self.view.frame)-100) style:UITableViewStylePlain];
     _tableView.delegate =self;
     _tableView.dataSource = self;
+    _tableView.showsVerticalScrollIndicator = NO;
+    [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kTableCellIdentifier];
     [self.view  addSubview:_tableView];
-    
+    if (@available(iOS 11.0,*)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
-- (void)laodCityData {
+- (void)laodNameData {
     self.indexData = @[@"A",@"B",@"C",@"D",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"R",@"S",@"T",@"U",@"D",@"V",@"W",@"X",@"D",@"Y",@"Z"];
     NSArray *suppositionalGroup = @[@"JAMES",@"LISA",@"THOMAS",@"ROBERT",@"JOHN",@"PAUL",@"SUSAN"];
     NSMutableArray *cityMulList = [[NSMutableArray alloc]init];
@@ -75,21 +84,14 @@
 #pragma mark - ZHXIndexViewDelegate
 - (void)indexViewDidSelectIndex:(NSInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
-//    CGFloat offsetY = [self.tableView rectForRowAtIndexPath:indexPath].origin.y;
-////    [self.tableView layoutatt]
-//    /**
-//     If you set section header , collectionView edgeInsets .
-//     Please exclude it .
-//     */
-////    if (self.sectionHeaderHeight>0) {
-////        offsetY = offsetY - self.sectionHeaderHeight;
-////    }
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 #pragma mark - UIScrollView Delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        
         NSArray *indexPathsForVisibleRows= self.tableView.indexPathsForVisibleRows;
         NSIndexPath *minIndexPath = [NSIndexPath indexPathForRow:0 inSection:9999];
         NSIndexPath *maxIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -100,6 +102,8 @@
             maxIndexPath = [itemIndex compare:maxIndexPath]==NSOrderedDescending?itemIndex:maxIndexPath;
         }
         [self.indexView changeSelectIndexWhenScrollStop:minIndexPath.section];
+        
+        
     });
 }
 #pragma mark - UITableViewDataSource,UITableViewDelegate
@@ -124,20 +128,16 @@
     UIView *header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
     header.backgroundColor = [UIColor colorWithString:@"#e3e3e3"];
     UILabel * titleLB = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, ScreenWidth-30, 30)];
-      [header addSubview:titleLB];
-      titleLB.textColor = [UIColor colorWithString:@"#333333"];
-      titleLB.font = [UIFont systemFontOfSize:17];
+    [header addSubview:titleLB];
+    titleLB.textColor = [UIColor colorWithString:@"#333333"];
+    titleLB.font = [UIFont systemFontOfSize:17];
     titleLB.text = [self.indexData objectAtIndex:section];
     return header;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static  NSString *  CellIdentifier = @"CellIdentifier";
-    UITableViewCell  * cell = [tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell  alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+    UITableViewCell  * cell = [tableView  dequeueReusableCellWithIdentifier:kTableCellIdentifier];
+
     NSDictionary *nameDict = [self.nameList objectAtIndex:indexPath.section];
     NSArray *nameGroup = [nameDict valueForKey:[self.indexData objectAtIndex:indexPath.section]];
     
