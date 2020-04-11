@@ -20,10 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZHXIndexView : UIView
 
-/// determine the top section on scrreen when scroll stop .
-/// @param view dispaly view
-+ (NSInteger)determineTopSectionLocationWithView:(id)view;
-
 /**
 * The delegate of indexView.
 */
@@ -56,9 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /****************************************
  If you want the selected button to be highlighted, please implement the following properties and methods.
- 
- one : itemSelectedBackgroundColor
- two : - (void)changeSelectIndexWhenScrollStop:(NSInteger)index
  ****************************************/
 
 /**
@@ -68,9 +61,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UIColor *itemHighlightColor;
 
 
+/*
+  Please note:
+  This method needs to be called in '- (void)scrollViewDidScroll:(UIScrollView *)scrollView' in your page.
+ */
 /// change select item to highlightColor when scroll stop
-/// @param index selectIndex
-- (void)updateItemHighlightWhenScrollStopWithIndex:(NSInteger)index;
+/// @param displayView The view being displayed might be a collectionView or a tableView
+- (void)updateItemHighlightWhenScrollStopWithDispalyView:(id)displayView;
+
 
 /*If you need show right indicator view when you touch,Please implement follow property*/
 

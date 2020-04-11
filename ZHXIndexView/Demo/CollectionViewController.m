@@ -97,9 +97,7 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        NSInteger topSection =  [ZHXIndexView determineTopSectionLocationWithView:self.collectionView];
-        [self.indexView updateItemHighlightWhenScrollStopWithIndex:topSection];
+        [self.indexView updateItemHighlightWhenScrollStopWithDispalyView:self.collectionView];
     });
 }
 #pragma mark - Getter Method
