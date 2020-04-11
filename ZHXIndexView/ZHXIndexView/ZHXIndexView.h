@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZHXIndexView : UIView
 
+/// Initialization method
+/// @param frame give the right values
+- (instancetype)initIndexViewWithFrame:(CGRect)frame;
 /**
 * The delegate of indexView.
 */
@@ -29,11 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 * The data source of indexView.
 */
 @property(nonatomic, strong) NSArray <NSString *>*indexTitles;
-
-/**
-* The height of View . Default is View.frame.size.height.
-*/
-@property(nonatomic,assign) float contentHeight;
 
 /**
 * The view backgroundcolor. Default is clear.
@@ -59,7 +57,14 @@ NS_ASSUME_NONNULL_BEGIN
 *
 */
 @property(nonatomic, strong) UIColor *itemHighlightColor;
-
+/**
+ * The highlight item size. Default is MIN(item.width,item.height)/2 .
+ */
+@property(nonatomic, assign) CGFloat itemHighlightDiameter;
+/**
+ * The title tintColor of highlight  item. Default is white.
+ */
+@property(nonatomic, strong) UIColor *itemHighlightTitleColor;
 
 /*
   Please note:
@@ -70,7 +75,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateItemHighlightWhenScrollStopWithDispalyView:(id)displayView;
 
 
-/*If you need show right indicator view when you touch,Please implement follow property*/
+/****************************************
+If you need show right indicator view when you touch,Please implement follow property.
+****************************************/
 
 /**
 * The display indicator. Default is YES .

@@ -69,13 +69,13 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
     [self.collectionView reloadData];
 }
 - (void)addIndexView {
-    self.indexView = [[ZHXIndexView alloc]initWithFrame:CGRectMake(ScreenWidth-24, 180, 24, 550)];
+    self.indexView = [[ZHXIndexView alloc]initIndexViewWithFrame:CGRectMake(ScreenWidth-24, 180, 24, 550)];
     [self.view addSubview:self.indexView];
     self.indexView.delegate = self;
-    
-    self.indexView.indexTitles = self.indexData;
     self.indexView.itemTitleColor = [UIColor colorWithString:@"#999999"];
     self.indexView.itemHighlightColor = [UIColor colorWithString:@"#198CFF"];
+    self.indexView.indexTitles = self.indexData;
+
 }
 #pragma mark - ZHXIndexViewDelegate
 - (void)indexViewDidSelectIndex:(NSInteger)index {

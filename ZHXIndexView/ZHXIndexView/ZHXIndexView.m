@@ -12,14 +12,14 @@
 @interface ZHXIndexView ()
 @property(nonatomic, strong) NSMutableArray<ZHXIndexItemView *> *indexButtons;
 @property(nonatomic, assign) CGFloat buttonHeight;
-@property(nonatomic,assign) NSInteger selectedIndex;
-@property (nonatomic, strong) UILabel *indicatorView;
-
+@property(nonatomic, assign) NSInteger selectedIndex;
+@property(nonatomic, strong) UILabel *indicatorView;
+@property(nonatomic, assign) float contentHeight;
 @end
 
 @implementation ZHXIndexView
 #pragma mark - LifeCycle Method
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initIndexViewWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -27,6 +27,7 @@
         self.itemTitleColor = [UIColor blackColor];
         self.itemTitleFont = [UIFont systemFontOfSize:13.0];
         self.selectedIndex = 0;
+        self.itemHighlightTitleColor = [UIColor whiteColor];
         self.showIndicatorView = YES;
         self.indicatorBackgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.5 ];
         self.indicatorTextColor = [UIColor whiteColor];
@@ -62,13 +63,10 @@
     self.indexButtons = [self creatAllButtons];
     
 }
-- (void)setContentHeight:(float)contentHeight{
-    _contentHeight = contentHeight;
-}
 - (void)setItemTitleColor:(UIColor *)itemTitleColor {
     _itemTitleColor = itemTitleColor;
     for (ZHXIndexItemView *btn in self.indexButtons) {
-        [btn setTitleColor:_itemTitleColor forState:UIControlStateNormal];
+        btn.contntLB.textColor = _itemTitleColor;
     }
 }
 
@@ -85,7 +83,13 @@
 }
 - (void)setItemHighlightColor:(UIColor *)itemHighlightColor{
     _itemHighlightColor = itemHighlightColor;
- 
+    
+}
+- (void)setItemHighlightDiameter:(CGFloat)itemHighlightDiameter{
+    _itemHighlightDiameter = itemHighlightDiameter;
+}
+- (void)setItemHighlightTitleColor:(UIColor *)itemHighlightTitleColor{
+    _itemHighlightTitleColor = itemHighlightTitleColor;
 }
 - (void)setShowIndicatorView:(BOOL)showIndicatorView
 {
@@ -154,12 +158,17 @@
 }
 - (void)changeSelectItemColorWithIndex:(NSInteger)index{
     self.selectedIndex = index;
+    if (!self.itemHighlightColor) {
+        return;
+    }
     for (int i=0; i<self.indexButtons.count; i++) {
         ZHXIndexItemView *btn = [self.indexButtons objectAtIndex:i];
         if (i==self.selectedIndex) {
             btn.badge.backgroundColor = self.itemHighlightColor;
+            btn.contntLB.textColor = self.itemHighlightTitleColor;
         }else{
             btn.badge.backgroundColor = [UIColor clearColor];
+            btn.contntLB.textColor = self.itemTitleColor;
         }
     }
 }
@@ -206,7 +215,7 @@
         return;
     }
     ZHXIndexItemView *btn = [self.indexButtons objectAtIndex:index];
-    self.indicatorView.center = CGPointMake(-(self.indicatorRightMargin+self.indicatorHeight), btn.center.y);
+    self.indicatorView.center = CGPointMake(-(self.indicatorRightMargin+self.indicatorHeight/2), btn.center.y);
     self.indicatorView.text = [self.indexTitles objectAtIndex:index];
     self.indicatorView.alpha = 1;
     self.indicatorView.hidden = NO;
@@ -228,6 +237,9 @@
     UITouch *touch = touchArray.firstObject;
     CGPoint touchPoint = [touch locationInView:self];
     NSInteger buttonTag = touchPoint.y  / self.buttonHeight;
+    if (buttonTag>=self.indexTitles.count) {
+        buttonTag = self.indexTitles.count-1;
+    }
     [self changeSelectItemColorWithIndex:buttonTag];
     
     [self showIndicatorWithIndex:buttonTag];

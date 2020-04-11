@@ -73,7 +73,7 @@ static  NSString *const kTableHeaderIdentifier = @"ZHXIndexViewTableHeaderIdenti
     [self.tableView reloadData];
 }
 - (void)addIndexView {
-    self.indexView = [[ZHXIndexView alloc]initWithFrame:CGRectMake(ScreenWidth-24, 180, 24, 550)];
+    self.indexView = [[ZHXIndexView alloc]initIndexViewWithFrame:CGRectMake(ScreenWidth-24, 180, 24, 550)];
     [self.view addSubview:self.indexView];
     self.indexView.delegate = self;
     
