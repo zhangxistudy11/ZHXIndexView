@@ -7,7 +7,42 @@
 //
 
 #import "ZHXIndexView.h"
-#import "ZHXIndexItemView.h"
+@interface ZHXIndexItemView : UIButton
+@property(nonatomic,strong) UILabel *contentLB;
+@property(nonatomic,strong) UIView *badge;
+@end
+@implementation ZHXIndexItemView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setUpView];
+    }
+    return self;
+}
+- (void)setUpView {
+    
+    self.badge = [[UIView alloc]init];
+    [self addSubview:self.badge];
+    
+    self.contentLB = [[UILabel alloc]init];
+    [self addSubview:self.contentLB];
+
+}
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGFloat badgeWH = MIN(self.frame.size.width, self.frame.size.height);
+    self.badge.frame = CGRectMake(self.frame.size.width/2-badgeWH/2, self.frame.size.height/2-badgeWH/2, badgeWH, badgeWH);
+    self.badge.layer.cornerRadius = badgeWH/2;
+    
+    self.contentLB.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    self.contentLB.textAlignment = NSTextAlignmentCenter;
+    
+    
+}
+@end
 
 @interface ZHXIndexView ()
 @property(nonatomic, strong) NSMutableArray<ZHXIndexItemView *> *indexButtons;
@@ -46,6 +81,17 @@
         ZHXIndexItemView *btn = self.indexButtons[i];
         if (i == 0) {
             btn.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), self.buttonHeight);
+            if (self.selectedIndex==0) {
+                if (self.itemHighlightColor) {
+                    if ([self.itemNoHighlightIndexArray containsObject:@(0)]) {
+                        btn.badge.backgroundColor = [UIColor clearColor];
+                        btn.contentLB.textColor = self.itemHighlightColor;
+                    }else{
+                        btn.badge.backgroundColor = self.itemHighlightColor;
+                        btn.contentLB.textColor = self.itemHighlightTitleColor;
+                    }
+                }
+            }
         } else {
             ZHXIndexItemView *lastBtn = self.indexButtons[i - 1];
             btn.frame = CGRectMake(0, CGRectGetMaxY(lastBtn.frame), CGRectGetWidth(self.frame), self.buttonHeight);
@@ -165,8 +211,8 @@
         ZHXIndexItemView *btn = [self.indexButtons objectAtIndex:i];
         if (i==self.selectedIndex) {
             if ([self.itemNoHighlightIndexArray containsObject:@(i)]) {
-              btn.badge.backgroundColor = [UIColor clearColor];
-             btn.contentLB.textColor = self.itemHighlightColor;
+                btn.badge.backgroundColor = [UIColor clearColor];
+                btn.contentLB.textColor = self.itemHighlightColor;
             }else{
                 btn.badge.backgroundColor = self.itemHighlightColor;
                 btn.contentLB.textColor = self.itemHighlightTitleColor;
@@ -222,7 +268,7 @@
     if ([self.itemNoHighlightIndexArray containsObject:@(index)]) {
         return;
     }
-
+    
     ZHXIndexItemView *btn = [self.indexButtons objectAtIndex:index];
     self.indicatorView.center = CGPointMake(-(self.indicatorRightMargin+self.indicatorHeight/2), btn.center.y);
     self.indicatorView.text = [self.indexTitles objectAtIndex:index];
@@ -278,3 +324,4 @@
 }
 
 @end
+
