@@ -13,6 +13,7 @@
 		330F51692438B81C00E9C7A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 330F51672438B81C00E9C7A9 /* LaunchScreen.storyboard */; };
 		330F516C2438B81C00E9C7A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F516B2438B81C00E9C7A9 /* main.m */; };
 		33213A6D2439C7ED00E6BE54 /* ZHXIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33213A6C2439C7ED00E6BE54 /* ZHXIndexView.m */; };
+		334F09D624416E4F00FAF10B /* ZHXIndexItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334F09D524416E4F00FAF10B /* ZHXIndexItemView.m */; };
 		335D8415243B115500F7C792 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D840E243B115500F7C792 /* RootViewController.m */; };
 		335D8416243B115500F7C792 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D840F243B115500F7C792 /* CollectionViewController.m */; };
 		335D8417243B115500F7C792 /* ZHXCityCollectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D8413243B115500F7C792 /* ZHXCityCollectionHeader.m */; };
@@ -33,6 +34,8 @@
 		330F516B2438B81C00E9C7A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		33213A6B2439C7ED00E6BE54 /* ZHXIndexView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHXIndexView.h; sourceTree = "<group>"; };
 		33213A6C2439C7ED00E6BE54 /* ZHXIndexView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHXIndexView.m; sourceTree = "<group>"; };
+		334F09D424416E4F00FAF10B /* ZHXIndexItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHXIndexItemView.h; sourceTree = "<group>"; };
+		334F09D524416E4F00FAF10B /* ZHXIndexItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHXIndexItemView.m; sourceTree = "<group>"; };
 		335D840D243B115500F7C792 /* ZHXCityItemCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHXCityItemCollectionCell.h; sourceTree = "<group>"; };
 		335D840E243B115500F7C792 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		335D840F243B115500F7C792 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 			children = (
 				33213A6B2439C7ED00E6BE54 /* ZHXIndexView.h */,
 				33213A6C2439C7ED00E6BE54 /* ZHXIndexView.m */,
+				334F09D424416E4F00FAF10B /* ZHXIndexItemView.h */,
+				334F09D524416E4F00FAF10B /* ZHXIndexItemView.m */,
 			);
 			path = ZHXIndexView;
 			sourceTree = "<group>";
@@ -197,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				335D8416243B115500F7C792 /* CollectionViewController.m in Sources */,
+				334F09D624416E4F00FAF10B /* ZHXIndexItemView.m in Sources */,
 				330F515B2438B81800E9C7A9 /* AppDelegate.m in Sources */,
 				335D8418243B115500F7C792 /* ZHXCityItemCollectionCell.m in Sources */,
 				335D841E243B15DA00F7C792 /* TableViewController.m in Sources */,

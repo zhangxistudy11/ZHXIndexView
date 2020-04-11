@@ -79,7 +79,7 @@ static  NSString *const kTableHeaderIdentifier = @"ZHXIndexViewTableHeaderIdenti
     
     self.indexView.indexTitles = self.indexData;
     self.indexView.itemTitleColor = [UIColor colorWithString:@"#999999"];
-    self.indexView.itemSelectedBackgroundColor = [UIColor colorWithString:@"#198CFF"];
+    self.indexView.itemHighlightColor = [UIColor colorWithString:@"#198CFF"];
 }
 #pragma mark - ZHXIndexViewDelegate
 - (void)indexViewDidSelectIndex:(NSInteger)index {
@@ -91,7 +91,7 @@ static  NSString *const kTableHeaderIdentifier = @"ZHXIndexViewTableHeaderIdenti
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSInteger topSection =  [ZHXIndexView determineTopSectionLocationWithView:self.tableView];
-        [self.indexView changeSelectIndexWhenScrollStop:topSection];
+        [self.indexView updateItemHighlightWhenScrollStopWithIndex:topSection];
         
         
     });

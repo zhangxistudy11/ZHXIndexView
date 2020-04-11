@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSArray <NSString *>*indexTitles;
 
 /**
-* The height of View . Size.hieght  is default value.
+* The height of View . Default is View.frame.size.height.
 */
 @property(nonatomic,assign) float contentHeight;
 
@@ -49,22 +49,28 @@ NS_ASSUME_NONNULL_BEGIN
 */
 @property(nonatomic, strong) UIColor *itemTitleColor;
 /**
-* The title size of item. Default is 13.0.
+* The title size of item. Default is [UIFont systemFontOfSize:13.0].
 */
-@property(nonatomic, assign) CGFloat itemTitleSize;
+@property(nonatomic, strong) UIFont *itemTitleFont;
 
-/*If you need selected item backgroundColor ,Please implement follow property、method*/
+
+/****************************************
+ If you want the selected button to be highlighted, please implement the following properties and methods.
+ 
+ one : itemSelectedBackgroundColor
+ two : - (void)changeSelectIndexWhenScrollStop:(NSInteger)index
+ ****************************************/
 
 /**
-* The item backgroundcolor when selected. Default is nil.
+* The  highlightColor when item is selected. Default is nil.
 *
 */
-@property(nonatomic, strong) UIColor *itemSelectedBackgroundColor;
+@property(nonatomic, strong) UIColor *itemHighlightColor;
 
 
-/// change select item backgroundcolor when scroll stop
+/// change select item to highlightColor when scroll stop
 /// @param index selectIndex
-- (void)changeSelectIndexWhenScrollStop:(NSInteger)index;
+- (void)updateItemHighlightWhenScrollStopWithIndex:(NSInteger)index;
 
 /*If you need show right indicator view when you touch,Please implement follow property*/
 

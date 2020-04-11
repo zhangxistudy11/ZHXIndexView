@@ -75,7 +75,7 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
     
     self.indexView.indexTitles = self.indexData;
     self.indexView.itemTitleColor = [UIColor colorWithString:@"#999999"];
-    self.indexView.itemSelectedBackgroundColor = [UIColor colorWithString:@"#198CFF"];
+    self.indexView.itemHighlightColor = [UIColor colorWithString:@"#198CFF"];
 }
 #pragma mark - ZHXIndexViewDelegate
 - (void)indexViewDidSelectIndex:(NSInteger)index {
@@ -99,7 +99,7 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         NSInteger topSection =  [ZHXIndexView determineTopSectionLocationWithView:self.collectionView];
-        [self.indexView changeSelectIndexWhenScrollStop:topSection];
+        [self.indexView updateItemHighlightWhenScrollStopWithIndex:topSection];
     });
 }
 #pragma mark - Getter Method
