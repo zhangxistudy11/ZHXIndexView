@@ -26,8 +26,8 @@
     self.badge = [[UIView alloc]init];
     [self addSubview:self.badge];
     
-    self.contntLB = [[UILabel alloc]init];
-    [self addSubview:self.contntLB];
+    self.contentLB = [[UILabel alloc]init];
+    [self addSubview:self.contentLB];
 
 }
 - (void)layoutSubviews {
@@ -37,8 +37,9 @@
     self.badge.frame = CGRectMake(self.frame.size.width/2-badgeWH/2, self.frame.size.height/2-badgeWH/2, badgeWH, badgeWH);
     self.badge.layer.cornerRadius = badgeWH/2;
     
-    self.contntLB.frame = self.bounds;
-    self.contntLB.textAlignment = NSTextAlignmentCenter;
+    self.contentLB.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    self.contentLB.textAlignment = NSTextAlignmentCenter;
+    
     
 }
 @end

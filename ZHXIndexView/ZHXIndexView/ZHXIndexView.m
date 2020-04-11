@@ -66,14 +66,14 @@
 - (void)setItemTitleColor:(UIColor *)itemTitleColor {
     _itemTitleColor = itemTitleColor;
     for (ZHXIndexItemView *btn in self.indexButtons) {
-        btn.contntLB.textColor = _itemTitleColor;
+        btn.contentLB.textColor = _itemTitleColor;
     }
 }
 
 - (void)setItemTitleFont:(UIFont *)itemTitleFont{
     _itemTitleFont = itemTitleFont;
     for (ZHXIndexItemView *btn in self.indexButtons) {
-        btn.contntLB.font = _itemTitleFont;
+        btn.contentLB.font = _itemTitleFont;
     }
 }
 
@@ -142,12 +142,12 @@
         ZHXIndexItemView *btn = [ZHXIndexItemView buttonWithType:UIButtonTypeSystem];
         btn.tag = i;
         if (self.itemTitleColor) {
-            btn.contntLB.textColor = self.itemTitleColor;
+            btn.contentLB.textColor = self.itemTitleColor;
         }
         if (self.itemTitleFont) {
-            btn.contntLB.font = self.itemTitleFont;
+            btn.contentLB.font = self.itemTitleFont;
         }
-        btn.contntLB.text = title;
+        btn.contentLB.text = title;
         btn.userInteractionEnabled = NO;
         [self addSubview:btn];
         
@@ -164,11 +164,16 @@
     for (int i=0; i<self.indexButtons.count; i++) {
         ZHXIndexItemView *btn = [self.indexButtons objectAtIndex:i];
         if (i==self.selectedIndex) {
-            btn.badge.backgroundColor = self.itemHighlightColor;
-            btn.contntLB.textColor = self.itemHighlightTitleColor;
+            if ([self.itemNoHighlightIndexArray containsObject:@(i)]) {
+              btn.badge.backgroundColor = [UIColor clearColor];
+             btn.contentLB.textColor = self.itemHighlightColor;
+            }else{
+                btn.badge.backgroundColor = self.itemHighlightColor;
+                btn.contentLB.textColor = self.itemHighlightTitleColor;
+            }
         }else{
             btn.badge.backgroundColor = [UIColor clearColor];
-            btn.contntLB.textColor = self.itemTitleColor;
+            btn.contentLB.textColor = self.itemTitleColor;
         }
     }
 }
@@ -214,6 +219,10 @@
     if (!self.showIndicatorView) {
         return;
     }
+    if ([self.itemNoHighlightIndexArray containsObject:@(index)]) {
+        return;
+    }
+
     ZHXIndexItemView *btn = [self.indexButtons objectAtIndex:index];
     self.indicatorView.center = CGPointMake(-(self.indicatorRightMargin+self.indicatorHeight/2), btn.center.y);
     self.indicatorView.text = [self.indexTitles objectAtIndex:index];

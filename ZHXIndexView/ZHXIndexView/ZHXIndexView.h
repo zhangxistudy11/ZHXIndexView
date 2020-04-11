@@ -74,9 +74,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param displayView The view being displayed might be a collectionView or a tableView
 - (void)updateItemHighlightWhenScrollStopWithDispalyView:(id)displayView;
 
-
 /****************************************
-If you need show right indicator view when you touch,Please implement follow property.
+If you need show sideways indicator view when you touch,Please implement follow property.
 ****************************************/
 
 /**
@@ -108,6 +107,14 @@ If you need show right indicator view when you touch,Please implement follow pro
 */
 @property (nonatomic, assign) CGFloat indicatorCornerRadius;
 
+/****************************************
+If you want not the selected button to be highlighted, please implement the following properties and methods.
+****************************************/
+
+/**
+ * The item don't hightlight index .
+ */
+@property(nonatomic, strong) NSArray <NSNumber *>* itemNoHighlightIndexArray;
 @end
 
 NS_ASSUME_NONNULL_END

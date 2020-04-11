@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZHXIndexItemView : UIButton
-@property(nonatomic,strong) UILabel *contntLB;
+@property(nonatomic,strong) UILabel *contentLB;
 @property(nonatomic,strong) UIView *badge;
 @end
 

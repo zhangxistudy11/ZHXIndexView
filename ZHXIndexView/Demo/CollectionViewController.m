@@ -51,7 +51,7 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
     
 }
 - (void)laodCityData {
-    self.indexData = @[@"A",@"B",@"C",@"D",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"R",@"S",@"T",@"U",@"D",@"V",@"W",@"X",@"D",@"Y",@"Z"];
+    self.indexData = @[@"Hot",@"Rec",@"His",@"A",@"B",@"C",@"D",@"F",@"O",@"P",@"R",@"S",@"T",@"U",@"D",@"V",@"W",@"X",@"D",@"Y",@"Z",@"#"];
     NSArray *suppositionalGroup = @[@"angeLes",@"newYork",@"london",@"beijing",@"shanghai",@"osaka",@"barcelona"];
     NSMutableArray *cityMulList = [[NSMutableArray alloc]init];
     for (NSString *letter in self.indexData) {
@@ -74,7 +74,9 @@ static  NSString *const kCollectionHeaderIdentifier = @"ZHXIndexViewHeaderIdenti
     self.indexView.delegate = self;
     self.indexView.itemTitleColor = [UIColor colorWithString:@"#999999"];
     self.indexView.itemHighlightColor = [UIColor colorWithString:@"#198CFF"];
+    self.indexView.itemTitleFont = [UIFont systemFontOfSize:10];
     self.indexView.indexTitles = self.indexData;
+    self.indexView.itemNoHighlightIndexArray = @[@(0),@(1),@(2),@(self.indexData.count-1)];
 
 }
 #pragma mark - ZHXIndexViewDelegate
