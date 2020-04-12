@@ -11,13 +11,13 @@
 [中文文档地址](https://www.jianshu.com/p/00a09e342062)
 # Table of Contents
 ---------------------------------------------------------
-[· Background](#Background)
-[· DisplayEffect](#DisplayEffect)
-[· Install](#Install)
-[· Usage](#Usage)
-[· API](#API)
-[· References](#References)
-[· License](#License)
+* [Background](#Background)
+* [DisplayEffect](#DisplayEffect)
+* [Install](#Install)
+* [Usage](#Usage)
+* [API](#API)
+* [References](#References)
+* [License](#License)
 
 
 # Background
