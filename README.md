@@ -48,5 +48,10 @@ for tableview:
  and introduce ZHXIndexView.h and ZHXIndexView.m files into your project.
  The red content is the file you want to import, and the blue file is Demo, you can see my specific use.
  ![image]( https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/file-path.jpg)
+2. If you use Cocoapods for your project, you can use the command line.
+```
+pod 'ZHXIndexView', '~> 0.0.1'
+```
+
 
  
