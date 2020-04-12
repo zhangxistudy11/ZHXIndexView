@@ -53,5 +53,26 @@ for tableview:
 pod 'ZHXIndexView', '~> 0.0.1'
 ```
 
+# Usage
+---------------------------------------------------------
+1. Basic use: add indexView to the current page
+```
+     /*
+     the frame here must be set correctly, the width and height of the indexView are determined here.
+     The height of a single item is given by the (height/ indexTitles.count )
+     */
+    self.indexView = [[ZHXIndexView alloc]initIndexViewWithFrame:CGRectMake(ScreenWidth-24, 180, 24, 550)];
+    [self.view addSubview:self.indexView];
+    /*
+     pay attention to setting the proxy method
+     */
+    self.indexView.delegate = self;
+    self.indexView.itemTitleColor = [UIColor colorWithString:@"#999999"];
+    self.indexView.itemTitleFont = [UIFont systemFontOfSize:10];
+    /*
+     Assigning values to data sources is best left behind to ensure that other required attributes have been assigned
+     */
+    self.indexView.indexTitles = self.indexData;
+```
 
  
