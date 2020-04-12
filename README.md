@@ -11,12 +11,14 @@
 [中文文档地址](https://www.jianshu.com/p/00a09e342062)
 # Table of Contents
 ---------------------------------------------------------
-[· Background](# Background)
-[· DisplayEffect](# DisplayEffect)
-[· Install](# Install)
-[· Usage](# Usage)
+[· Background](#Background)
+[· DisplayEffect](#DisplayEffect)
+[· Install](#Install)
+[· Usage](#Usage)
 [· API](# API)
-[· License](# License)
+[· References](#References)
+[· License](#License)
+
 
 # Background
 ---------------------------------------------------------
@@ -55,7 +57,7 @@ pod 'ZHXIndexView', '~> 0.0.1'
 
 # Usage
 ---------------------------------------------------------
-1. Basic use: add indexView to the current page
+##### 1. Basic use: add indexView to the current page
 ```
      /*
      the frame here must be set correctly, the width and height of the indexView are determined here.
@@ -75,4 +77,181 @@ pod 'ZHXIndexView', '~> 0.0.1'
     self.indexView.indexTitles = self.indexData;
 ```
 
+##### At the same time to implement the proxy method
+UICollectionView implements proxy method
+```
+#pragma mark - ZHXIndexViewDelegate
+- (void)indexViewDidSelectIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
+    CGFloat offsetY = [self.collectionView layoutAttributesForItemAtIndexPath:indexPath].frame.origin.y;
+    //For better positioning, subtract the section height and the top spacing inside each section
+    if (self.sectionHeaderHeight>0) {
+        offsetY = offsetY - self.sectionHeaderHeight;
+    }
+    if (self.cellTopMargin>0) {
+        offsetY = offsetY - self.cellTopMargin;
+    }
+    [self.collectionView setContentOffset:CGPointMake(0, offsetY) animated:NO];
+}
+```
+
+UITableView implements the proxy method
+
+```
+#pragma mark - ZHXIndexViewDelegate
+- (void)indexViewDidSelectIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+}
+```
+
+
+##### 2. Display selected highlighting: If the selected item needs to be highlighted, such as the second gif image, the background will be highlighted when the letter is selected.
+###### 2.1 、 Need to assign a value to this property
+
+```
+    self.indexView.itemHighlightColor = [UIColor colorWithString:@"#198CFF"];
+
+```
+
+###### 2.2 、 In order to make the item stopped on a highlight when the scrolling ends, the proxy method of ScrollView needs to be implemented in the page
+
+
+```
+    #pragma mark - UIScrollView Delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.indexView updateItemHighlightWhenScrollStopWithDispalyView:self.collectionView];
+    });
+}
+
+```
+
+
+###### 2.3、In some special scenes, if a certain item is selected without highlighting, such as the second item of the first gif above, you need to assign values ​​to the following attributes, and put the coordinate index that does not need to be highlighted into the array
+
+
+```
+    self.indexView.itemNoHighlightIndexArray = @[@(0),@(1),@(2)];
+
+```
+
+##### 3. When selected, with indicator: such as the  third gif
+
+
+```
+   self.indexView.showIndicatorView = YES;
+
+```
+
+ # Usage
+---------------------------------------------------------
+
+```
  
+/// Initialization method
+/// @param frame give the right values
+- (instancetype)initIndexViewWithFrame:(CGRect)frame;
+/**
+* The delegate of indexView.
+*/
+@property(nonatomic, weak) id<ZHXIndexViewDelegate> delegate;
+
+/**
+* The data source of indexView.
+*/
+@property(nonatomic, strong) NSArray <NSString *>*indexTitles;
+
+/**
+* The view backgroundcolor. Default is clear.
+*/
+@property(nonatomic, strong) UIColor *contentBackgroundColor;
+
+/**
+* The title tintColor of item. Default is black.
+*/
+@property(nonatomic, strong) UIColor *itemTitleColor;
+/**
+* The title size of item. Default is [UIFont systemFontOfSize:13.0].
+*/
+@property(nonatomic, strong) UIFont *itemTitleFont;
+
+
+/****************************************
+ If you want the selected button to be highlighted, please implement the following properties and methods.
+ ****************************************/
+
+/**
+* The  highlightColor when item is selected. Default is nil.
+*
+*/
+@property(nonatomic, strong) UIColor *itemHighlightColor;
+/**
+ * The highlight item size. Default is MIN(item.width,item.height)/2 .
+ */
+@property(nonatomic, assign) CGFloat itemHighlightDiameter;
+/**
+ * The title tintColor of highlight  item. Default is white.
+ */
+@property(nonatomic, strong) UIColor *itemHighlightTitleColor;
+
+/*
+  Please note:
+  This method needs to be called in '- (void)scrollViewDidScroll:(UIScrollView *)scrollView' in your page.
+ */
+/// change select item to highlightColor when scroll stop
+/// @param displayView The view being displayed might be a collectionView or a tableView
+- (void)updateItemHighlightWhenScrollStopWithDispalyView:(id)displayView;
+
+/****************************************
+If you need show sideways indicator view when you touch,Please implement follow property.
+****************************************/
+
+/**
+* The display indicator. Default is YES .
+*/
+@property(nonatomic,assign) BOOL showIndicatorView;
+/**
+* The  indicator backgroundcolor. Default is "#0C0C0C"   70%.
+*/
+@property (nonatomic, strong) UIColor *indicatorBackgroundColor;
+/**
+* The  indicator textColor. Default is white.
+*/
+@property (nonatomic, strong) UIColor *indicatorTextColor;
+/**
+* The  indicator font. Default is 15.
+*/
+@property (nonatomic, strong) UIFont *indicatorTextFont;
+/**
+* The  indicator height. Default is 20.
+*/
+@property (nonatomic, assign) CGFloat indicatorHeight;
+/**
+* The  margin with content left . Default is 15.
+*/
+@property (nonatomic, assign) CGFloat indicatorRightMargin;
+/**
+* The  indicator cornerradius. Default is 10.
+*/
+@property (nonatomic, assign) CGFloat indicatorCornerRadius;
+
+/****************************************
+If you want not the selected button to be highlighted, please implement the following properties and methods.
+****************************************/
+
+/**
+ * The item don't hightlight index .
+ */
+@property(nonatomic, strong) NSArray <NSNumber *>* itemNoHighlightIndexArray;
+
+```
+
+# Reference
+---------------------------------------------------------
+[SCIndexView](https://github.com/TalkingJourney/SCIndexView)
+
+# License
+---------------------------------------------------------
+MIT © Zhang Xi
+
