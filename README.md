@@ -84,7 +84,7 @@ pod 'ZHXIndexView', '~> 0.0.1'
 
 ##### At the same time to implement the proxy method
 UICollectionView implements proxy method
-```
+```objectivec
 #pragma mark - ZHXIndexViewDelegate
 - (void)indexViewDidSelectIndex:(NSInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
@@ -102,7 +102,7 @@ UICollectionView implements proxy method
 
 UITableView implements the proxy method
 
-```
+```objectivec
 #pragma mark - ZHXIndexViewDelegate
 - (void)indexViewDidSelectIndex:(NSInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
@@ -114,7 +114,7 @@ UITableView implements the proxy method
 ##### 2. Display selected highlighting: If the selected item needs to be highlighted, such as the second gif image, the background will be highlighted when the letter is selected.
 ###### 2.1 、 Need to assign a value to this property
 
-```
+```objectivec
     self.indexView.itemHighlightColor = [UIColor colorWithString:@"#198CFF"];
 
 ```
@@ -122,7 +122,7 @@ UITableView implements the proxy method
 ###### 2.2 、 In order to make the item stopped on a highlight when the scrolling ends, the proxy method of ScrollView needs to be implemented in the page
 
 
-```
+```objectivec
     #pragma mark - UIScrollView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -136,7 +136,7 @@ UITableView implements the proxy method
 ###### 2.3、In some special scenes, if a certain item is selected without highlighting, such as the second item of the first gif above, you need to assign values ​​to the following attributes, and put the coordinate index that does not need to be highlighted into the array
 
 
-```
+```objectivec
     self.indexView.itemNoHighlightIndexArray = @[@(0),@(1),@(2)];
 
 ```
@@ -144,7 +144,7 @@ UITableView implements the proxy method
 ##### 3. When selected, with indicator: such as the  third gif
 
 
-```
+```objectivec
    self.indexView.showIndicatorView = YES;
 
 ```
@@ -152,7 +152,7 @@ UITableView implements the proxy method
  # API
 ---------------------------------------------------------
 
-```
+```objectivec
  
 /// Initialization method
 /// @param frame give the right values
