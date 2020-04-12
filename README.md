@@ -34,7 +34,7 @@ basics：
 
 highlight：
 
-![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/Not-selected-by-default.gif)
+![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/highlight%26noIndicator.gif)
 
 indicator：
 
