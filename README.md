@@ -113,7 +113,7 @@ pod 'ZHXIndexView', '~> 0.0.1'
 ```
 ## Expanded usage
 
-## First  
+## First Case
 ### If the selected item needs to be highlighted, such as the second gif image, the background will be highlighted when the letter is selected.
 #### Need to assign a value to this property
 
@@ -136,7 +136,7 @@ pod 'ZHXIndexView', '~> 0.0.1'
 ```
 
 
-## Second 
+## Second Case
 ### In some special scenes, if a certain item is selected without highlighting, such as the first three items of the third gif above, you need to assign values to the following attributes, and put the coordinate index that does not need to be highlighted into the array
 
 
@@ -145,7 +145,7 @@ pod 'ZHXIndexView', '~> 0.0.1'
 
 ```
 
-## Third 
+## Third Case
 ### When selected, with indicator: such as the  third and fourth gif
 
 
