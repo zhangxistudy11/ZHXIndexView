@@ -61,7 +61,8 @@ pod 'ZHXIndexView', '~> 0.0.1'
 
 # Usage
 ---------------------------------------------------------
-##### 1. Basic use: add indexView to the current page
+## Basic usage 
+### Basic use: add indexView to the current page
 ```objectivec
 
      /*
@@ -82,8 +83,9 @@ pod 'ZHXIndexView', '~> 0.0.1'
     self.indexView.indexTitles = self.indexData;
 ```
 
-##### At the same time to implement the proxy method
-UICollectionView implements proxy method
+### At the same time to implement the proxy method
+
+#### UICollectionView implements proxy method
 ```objectivec
 #pragma mark - ZHXIndexViewDelegate
 - (void)indexViewDidSelectIndex:(NSInteger)index {
@@ -100,7 +102,7 @@ UICollectionView implements proxy method
 }
 ```
 
-UITableView implements the proxy method
+#### UITableView implements the proxy method
 
 ```objectivec
 #pragma mark - ZHXIndexViewDelegate
@@ -109,17 +111,17 @@ UITableView implements the proxy method
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 ```
+## Expanded usage
 
-
-##### 2. Display selected highlighting: If the selected item needs to be highlighted, such as the second gif image, the background will be highlighted when the letter is selected.
-###### 2.1 、 Need to assign a value to this property
+## First.  If the selected item needs to be highlighted, such as the second gif image, the background will be highlighted when the letter is selected.
+#### Need to assign a value to this property
 
 ```objectivec
     self.indexView.itemHighlightColor = [UIColor colorWithString:@"#198CFF"];
 
 ```
 
-###### 2.2 、 In order to make the item stopped on a highlight when the scrolling ends, the proxy method of ScrollView needs to be implemented in the page
+#### In order to make the item stopped on a highlight when the scrolling ends, the proxy method of ScrollView needs to be implemented in the page
 
 
 ```objectivec
@@ -133,7 +135,7 @@ UITableView implements the proxy method
 ```
 
 
-###### 2.3、In some special scenes, if a certain item is selected without highlighting, such as the second item of the first gif above, you need to assign values ​​to the following attributes, and put the coordinate index that does not need to be highlighted into the array
+## Second. In some special scenes, if a certain item is selected without highlighting, such as the first three items of the third gif above, you need to assign values to the following attributes, and put the coordinate index that does not need to be highlighted into the array
 
 
 ```objectivec
@@ -141,7 +143,7 @@ UITableView implements the proxy method
 
 ```
 
-##### 3. When selected, with indicator: such as the  third gif
+## Third. When selected, with indicator: such as the  third and fourth gif
 
 
 ```objectivec
