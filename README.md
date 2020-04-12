@@ -38,7 +38,7 @@ highlight：
 
 indicator：
 
-![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/indicator.gif)
+![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/noHighlightInFront.gif)
 
 for tableview:
 
