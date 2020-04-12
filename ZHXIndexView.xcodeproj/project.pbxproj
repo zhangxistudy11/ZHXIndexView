@@ -14,6 +14,11 @@
 		330F516C2438B81C00E9C7A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F516B2438B81C00E9C7A9 /* main.m */; };
 		33213A6D2439C7ED00E6BE54 /* ZHXIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33213A6C2439C7ED00E6BE54 /* ZHXIndexView.m */; };
 		3325AE6A244219DB00189088 /* normal.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3325AE69244219DA00189088 /* normal.jpg */; };
+		3325AE712442B24100189088 /* Not-selected-by-default.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3325AE6C2442B24100189088 /* Not-selected-by-default.gif */; };
+		3325AE722442B24100189088 /* file-path.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3325AE6D2442B24100189088 /* file-path.jpg */; };
+		3325AE732442B24100189088 /* indicator.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3325AE6E2442B24100189088 /* indicator.gif */; };
+		3325AE742442B24100189088 /* basic.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3325AE6F2442B24100189088 /* basic.gif */; };
+		3325AE752442B24100189088 /* tableview.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3325AE702442B24100189088 /* tableview.gif */; };
 		335D8415243B115500F7C792 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D840E243B115500F7C792 /* RootViewController.m */; };
 		335D8416243B115500F7C792 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D840F243B115500F7C792 /* CollectionViewController.m */; };
 		335D8417243B115500F7C792 /* ZHXCityCollectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D8413243B115500F7C792 /* ZHXCityCollectionHeader.m */; };
@@ -35,6 +40,11 @@
 		33213A6B2439C7ED00E6BE54 /* ZHXIndexView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHXIndexView.h; sourceTree = "<group>"; };
 		33213A6C2439C7ED00E6BE54 /* ZHXIndexView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHXIndexView.m; sourceTree = "<group>"; };
 		3325AE69244219DA00189088 /* normal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = normal.jpg; sourceTree = "<group>"; };
+		3325AE6C2442B24100189088 /* Not-selected-by-default.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Not-selected-by-default.gif"; sourceTree = "<group>"; };
+		3325AE6D2442B24100189088 /* file-path.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "file-path.jpg"; sourceTree = "<group>"; };
+		3325AE6E2442B24100189088 /* indicator.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = indicator.gif; sourceTree = "<group>"; };
+		3325AE6F2442B24100189088 /* basic.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = basic.gif; sourceTree = "<group>"; };
+		3325AE702442B24100189088 /* tableview.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tableview.gif; sourceTree = "<group>"; };
 		335D840D243B115500F7C792 /* ZHXCityItemCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHXCityItemCollectionCell.h; sourceTree = "<group>"; };
 		335D840E243B115500F7C792 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		335D840F243B115500F7C792 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
@@ -108,6 +118,11 @@
 			isa = PBXGroup;
 			children = (
 				3325AE69244219DA00189088 /* normal.jpg */,
+				3325AE6F2442B24100189088 /* basic.gif */,
+				3325AE6D2442B24100189088 /* file-path.jpg */,
+				3325AE6E2442B24100189088 /* indicator.gif */,
+				3325AE6C2442B24100189088 /* Not-selected-by-default.gif */,
+				3325AE702442B24100189088 /* tableview.gif */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -195,7 +210,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3325AE712442B24100189088 /* Not-selected-by-default.gif in Resources */,
 				330F51692438B81C00E9C7A9 /* LaunchScreen.storyboard in Resources */,
+				3325AE732442B24100189088 /* indicator.gif in Resources */,
+				3325AE722442B24100189088 /* file-path.jpg in Resources */,
+				3325AE752442B24100189088 /* tableview.gif in Resources */,
+				3325AE742442B24100189088 /* basic.gif in Resources */,
 				330F51662438B81C00E9C7A9 /* Assets.xcassets in Resources */,
 				3325AE6A244219DB00189088 /* normal.jpg in Resources */,
 			);
