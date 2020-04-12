@@ -85,7 +85,7 @@ pod 'ZHXIndexView', '~> 0.0.1'
 
 ### At the same time to implement the proxy method
 
-#### UICollectionView implements proxy method
+#### If UICollectionView , implements proxy method
 ```objectivec
 #pragma mark - ZHXIndexViewDelegate
 - (void)indexViewDidSelectIndex:(NSInteger)index {
@@ -102,7 +102,7 @@ pod 'ZHXIndexView', '~> 0.0.1'
 }
 ```
 
-#### UITableView implements the proxy method
+#### If UITableView , implements the proxy method
 
 ```objectivec
 #pragma mark - ZHXIndexViewDelegate
