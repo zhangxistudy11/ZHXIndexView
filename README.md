@@ -42,8 +42,11 @@ for tableview:
 
 ![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/tableview.gif)
 
+# Install
+---------------------------------------------------------
+1. Download  [ZHXIndexView](https://github.com/zhangxistudy11/ZHXIndexView)
+ and introduce ZHXIndexView.h and ZHXIndexView.m files into your project.
+ The red content is the file you want to import, and the blue file is Demo, you can see my specific use.
+ ![image]( https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/file-path.jpg)
 
-
-
-
-
+ 
