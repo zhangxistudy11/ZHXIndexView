@@ -25,6 +25,17 @@ Since the iOS system comes with a single index effect, and does not support UICo
 # DisplayEffect
 ---------------------------------------------------------
 
+basics：
+![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/basic.gif)
+highlight：
+![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/Not-selected-by-default.gif)
+indicator：
+![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/indicator.gif)
+for tableview:
+![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/tableview.gif)
+
+
+
 
 
 
