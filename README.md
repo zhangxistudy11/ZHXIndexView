@@ -32,11 +32,11 @@ basics：
 ![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/basic.gif)
 
 
-highlight：
+highlight & no indicator：
 
 ![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/highlight%26noIndicator.gif)
 
-indicator：
+indicator & not highlighted of front
 
 ![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/noHighlightInFront.gif)
 
