@@ -15,7 +15,7 @@
 [· DisplayEffect](#DisplayEffect)
 [· Install](#Install)
 [· Usage](#Usage)
-[· API](# API)
+[· API](#API)
 [· References](#References)
 [· License](#License)
 
@@ -144,7 +144,7 @@ UITableView implements the proxy method
 
 ```
 
- # Usage
+ # API
 ---------------------------------------------------------
 
 ```
