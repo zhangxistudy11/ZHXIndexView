@@ -62,7 +62,8 @@ pod 'ZHXIndexView', '~> 0.0.1'
 # Usage
 ---------------------------------------------------------
 ##### 1. Basic use: add indexView to the current page
-```
+```objectivec
+
      /*
      the frame here must be set correctly, the width and height of the indexView are determined here.
      The height of a single item is given by the (height/ indexTitles.count )
