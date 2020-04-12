@@ -5,9 +5,7 @@
 [![](https://img.shields.io/badge/tag-0.0.1-brightgreen.svg)](https://github.com/zhangxistudy11/ZHXIndexView/tree/0.0.1)
 [![](https://img.shields.io/badge/language-ObjectC-brightgreen.svg)](https://github.com/zhangxistudy11/ZHXIndexView)
 [![](https://img.shields.io/badge/中文-简书-brightgreen.svg)](https://www.jianshu.com/p/00a09e342062)
-[![](https://img.shields.io/badge/UICollectionView-IndexView-brightgreen.svg)](https://github.com/zhangxistudy11/ZHXIndexView)
-[![](https://img.shields.io/badge/UITableView-IndexView-brightgreen.svg)](https://github.com/zhangxistudy11/ZHXIndexView)
-[![](https://img.shields.io/badge/IndexView-UICollectionView&UITableView-blue.svg)](https://github.com/zhangxistudy11/ZHXIndexView)
+[![](https://img.shields.io/badge/UICollectionView&UITableView-IndexView-blue.svg)](https://github.com/zhangxistudy11/ZHXIndexView)
 
 
 
