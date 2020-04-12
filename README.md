@@ -7,6 +7,8 @@
 [![](https://img.shields.io/badge/中文-简书-brightgreen.svg)](https://www.jianshu.com/p/00a09e342062)
 [![](https://img.shields.io/badge/UICollectionView-IndexView-brightgreen.svg)](https://github.com/zhangxistudy11/ZHXIndexView)
 [![](https://img.shields.io/badge/UITableView-IndexView-brightgreen.svg)](https://github.com/zhangxistudy11/ZHXIndexView)
+[![](https://img.shields.io/badge/IndexView-UICollectionView&UITableView-blue.svg)](https://github.com/zhangxistudy11/ZHXIndexView)
+
 
 
 
