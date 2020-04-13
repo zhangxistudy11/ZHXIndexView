@@ -1,4 +1,4 @@
-![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/normal.jpg)
+![image](https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/normal.png)
 # ZHXIndexView
 ---------------------------------------------------------
 [![](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/zhangxistudy11/ZHXIndexView)
