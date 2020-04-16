@@ -258,7 +258,7 @@ If you want not the selected button to be highlighted, please implement the foll
 
 # References
 ---------------------------------------------------------
-[SCIndexView](https://github.com/TalkingJourney/SCIndexView)
+SCIndexView
 
 # License
 ---------------------------------------------------------
