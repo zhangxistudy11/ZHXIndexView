@@ -56,13 +56,13 @@ for tableview:
  ![image]( https://github.com/zhangxistudy11/ZHXIndexView/blob/master/ZHXIndexView/Source/file-path.jpg)
 2. If you use Cocoapods for your project, you can use the command line.
 ```
-pod 'ZHXIndexView', '~> 0.0.1'
+pod 'ZHXIndexView', '~> 0.0.3'
 ```
 
 # Usage
 ---------------------------------------------------------
-## Basic usage 
-### Basic use: add indexView to the current page
+### Basic usage 
+##### Basic use: add indexView to the current page
 ```objectivec
 
      /*
@@ -83,9 +83,9 @@ pod 'ZHXIndexView', '~> 0.0.1'
     self.indexView.indexTitles = self.indexData;
 ```
 
-### At the same time to implement the proxy method
+##### At the same time to implement the proxy method
 
-#### If UICollectionView , the proxy method is written as follows.
+###### If UICollectionView , the proxy method is written as follows.
 ```objectivec
 #pragma mark - ZHXIndexViewDelegate
 - (void)indexViewDidSelectIndex:(NSInteger)index {
@@ -102,7 +102,7 @@ pod 'ZHXIndexView', '~> 0.0.1'
 }
 ```
 
-#### If UITableView , the proxy method is written as follows.
+###### If UITableView , the proxy method is written as follows.
 
 ```objectivec
 #pragma mark - ZHXIndexViewDelegate
@@ -111,18 +111,18 @@ pod 'ZHXIndexView', '~> 0.0.1'
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 ```
-## Expanded usage
+### Expanded usage
 
-## First Case
-### If the selected item needs to be highlighted, such as the second gif image, the background will be highlighted when the letter is selected.
-#### Need to assign a value to this property
+#### First Case
+##### If the selected item needs to be highlighted, such as the second gif image, the background will be highlighted when the letter is selected.
+###### Need to assign a value to this property
 
 ```objectivec
     self.indexView.itemHighlightColor = [UIColor colorWithString:@"#198CFF"];
 
 ```
 
-#### In order to make the item stopped on a highlight when the scrolling ends, the proxy method of ScrollView needs to be implemented in the page
+###### In order to make the item stopped on a highlight when the scrolling ends, the proxy method of ScrollView needs to be implemented in the page
 
 
 ```objectivec
@@ -136,8 +136,8 @@ pod 'ZHXIndexView', '~> 0.0.1'
 ```
 
 
-## Second Case
-### In some special scenes, if a certain item is selected without highlighting, such as the first three items of the third gif above, you need to assign values to the following attributes, and put the coordinate index that does not need to be highlighted into the array
+#### Second Case
+##### In some special scenes, if a certain item is selected without highlighting, such as the first three items of the third gif above, you need to assign values to the following attributes, and put the coordinate index that does not need to be highlighted into the array
 
 
 ```objectivec
@@ -145,8 +145,8 @@ pod 'ZHXIndexView', '~> 0.0.1'
 
 ```
 
-## Third Case
-### When selected, with indicator: such as the  third and fourth gif
+#### Third Case
+##### When selected, with indicator: such as the  third and fourth gif
 
 
 ```objectivec
