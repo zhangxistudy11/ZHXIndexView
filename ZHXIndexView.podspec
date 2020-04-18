@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   #开源库的名字
   s.name         = "ZHXIndexView"
   #开源库当期版本
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   #开源库概述（打开GitHub能看到的描述）
   s.summary      = "Index indicator for UICollectionView and UITableView"
   #开源库描述 （这个描述会被用来生成开源库的标签和提高被搜到，必需写在中间一行，只要在中间一行，不需要考虑缩进）
