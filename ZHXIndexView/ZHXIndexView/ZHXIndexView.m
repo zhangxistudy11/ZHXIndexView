@@ -70,7 +70,6 @@
         self.indicatorHeight = 30.0;
         self.indicatorRightMargin = 10.0;
         self.indicatorCornerRadius = 10.0;
-        
     }
     return self;
 }
@@ -292,6 +291,9 @@
     UITouch *touch = touchArray.firstObject;
     CGPoint touchPoint = [touch locationInView:self];
     NSInteger buttonTag = touchPoint.y  / self.buttonHeight;
+    if (buttonTag<=0) {
+        buttonTag = 0;
+    }
     if (buttonTag>=self.indexTitles.count) {
         buttonTag = self.indexTitles.count-1;
     }
