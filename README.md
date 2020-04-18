@@ -62,7 +62,7 @@ pod 'ZHXIndexView', '~> 0.0.3'
 # Usage
 ---------------------------------------------------------
 ### Basic usage 
-##### Basic use: add indexView to the current page
+##### Add indexView to the current page
 ```objectivec
 
      /*
