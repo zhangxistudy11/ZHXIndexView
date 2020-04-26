@@ -265,6 +265,9 @@
         return;
     }
     if ([self.itemNoHighlightIndexArray containsObject:@(index)]) {
+        if (self.indicatorView && self.indicatorView.superview) {
+            self.indicatorView.hidden = YES;
+        }
         return;
     }
     
